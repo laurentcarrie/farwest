@@ -58,6 +58,7 @@ def simulate():
             data.append([f"équipe {indexA} ({attitudeA.name})", f"équipe {indexB} ({attitudeB.name})", gainsA, gainsB])
 
     st.header("resultat des braquages par paire d'équipes")
+    st.text(f"le maximum est {nombre_de_braquages} (braquages) * {gain_seul} (gain seul) : {nombre_de_braquages*gain_seul}")
     dfgains = pd.DataFrame(columns=["A", "B", "gains A", "gains B"], data=data)
     dfgains = dfgains.astype({"gains A":"int32","gains B":"int32"})
     print(dfgains)
@@ -74,9 +75,10 @@ def simulate():
     dfall = dfall.groupby("équipe")['gains'].aggregate("sum")
     dfall=dfall.astype({"gains":'int32'})
     st.header("resultat des gains")
+    nbpairs = nombre_equipes-1
+    st.text(f"le maximum est {nombre_de_braquages} (braquages) * {gain_seul} (gain seul) * {nbpairs} (nombre de paires par équipe) \n: {nombre_de_braquages*gain_seul*nbpairs}")
     st.dataframe(data=dfall)
 
 
-    st.button("GO !", key=None, help=None, on_click=simulate, args=None, kwargs=None, disabled=False)
+st.button("GO !", key=None, help=None, on_click=simulate, args=None, kwargs=None, disabled=False)
 
-st.button("configuration", key=None, help=None, on_click=configure, args=None, kwargs=None, disabled=False)
