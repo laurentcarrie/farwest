@@ -4,6 +4,8 @@ import pandas as pd
 import model.braquages
 from farwest.model.attitudes import Attitude
 
+
+
 st.title('le tournoi du far-west')
 st.subheader('à défaut de cow-boys')
 
